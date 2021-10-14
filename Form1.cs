@@ -18,6 +18,12 @@ namespace Лабораторная_работа__2
         {
             InitializeComponent(); // вызов метода который формирует поля на форме, добавляет свойства,
             // всё то, что находится в Form1.Designer.cs
+
+            // считывем значения из настроек
+            txtFirstNumber.Text = Properties.Settings.Default.a1.ToString();
+            txtSecondNumber.Text = Properties.Settings.Default.a2.ToString();
+            txtThirdNumber.Text = Properties.Settings.Default.a3.ToString();
+
         }
         private void button1_Click(object sender, EventArgs e) // реакция на клик
         {
@@ -34,6 +40,14 @@ namespace Лабораторная_работа__2
                 a[0] = int.Parse(this.txtFirstNumber.Text); // первое число
                 a[1] = int.Parse(this.txtSecondNumber.Text); // второе число
                 a[2] = int.Parse(this.txtThirdNumber.Text); // третье число
+
+                // передаем введенные значения в параметры  
+                Properties.Settings.Default.a1 = a[0];
+                Properties.Settings.Default.a2 = a[1];
+                Properties.Settings.Default.a3 = a[2];
+                Properties.Settings.Default.Save(); // сохраняем переданные значения,
+                                                    // чтобы они восстановились при очередном запуске
+
                 MessageBox.Show(Logic.Compare(a)); // выводим ответ
             }
             else
