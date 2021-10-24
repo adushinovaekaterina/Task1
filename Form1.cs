@@ -14,16 +14,59 @@ namespace Лабораторная_работа__2
      *    Это называется наследованием.*/
     public partial class Form1 : Form
     {
+        public static bool enterLast = false; // проверка, введено ли третье число и нажата клавиша Enter
         public Form1()
         {
             InitializeComponent(); // вызов метода который формирует поля на форме, добавляет свойства,
             // всё то, что находится в Form1.Designer.cs
 
-            // считывем значения из настроек
+            // считываем значения из настроек
             txtFirstNumber.Text = Properties.Settings.Default.a1.ToString();
             txtSecondNumber.Text = Properties.Settings.Default.a2.ToString();
             txtThirdNumber.Text = Properties.Settings.Default.a3.ToString();
 
+            this.KeyPreview = true; // обрабатываем клавиши на уровне формы
+
+            // отпускается клавиша, выполняется код Form1_KeyUp
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+
+            // метод KeyEventHandler обрабатывает событие KeyDown, которое срабатывает, когда нажата клавиша
+            txtFirstNumber.KeyDown += new KeyEventHandler(keydown);
+            txtSecondNumber.KeyDown += new KeyEventHandler(keydown1);
+            txtThirdNumber.KeyDown += new KeyEventHandler(keydown2);
+
+        }
+        private void keydown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // если нажата клавиша Enter
+            {
+                txtSecondNumber.Focus(); // установка фокуса на TextBox второго числа
+                e.SuppressKeyPress = true; // отключаем системный звук
+            }
+        }
+        private void keydown1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // если нажата клавиша Enter
+            {
+                txtThirdNumber.Focus(); // установка фокуса на TextBox третьего числа
+                e.SuppressKeyPress = true; // отключаем системный звук
+            }
+        }
+        private void keydown2(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // если нажата клавиша Enter
+            {
+                enterLast = true; // введено третье число
+                e.SuppressKeyPress = true; // отключаем системный звук
+            }
+        }
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (enterLast) // если введено третье число
+            {
+                button1.PerformClick(); // вызываем подпрограмму button1_Click
+                this.Close(); // закрываем форму
+            }
         }
         private void button1_Click(object sender, EventArgs e) // реакция на клик
         {
