@@ -20,11 +20,6 @@ namespace Лабораторная_работа__2
             InitializeComponent(); // вызов метода который формирует поля на форме, добавляет свойства,
             // всё то, что находится в Form1.Designer.cs
 
-            // считываем значения из настроек
-            txtFirstNumber.Text = Properties.Settings.Default.a1.ToString();
-            txtSecondNumber.Text = Properties.Settings.Default.a2.ToString();
-            txtThirdNumber.Text = Properties.Settings.Default.a3.ToString();
-
             this.KeyPreview = true; // обрабатываем клавиши на уровне формы
 
             // отпускается клавиша, выполняется код Form1_KeyUp
@@ -65,8 +60,23 @@ namespace Лабораторная_работа__2
             if (enterLast) // если введено третье число
             {
                 button1.PerformClick(); // вызываем подпрограмму button1_Click
-                this.Close(); // закрываем форму
             }
+            enterLast = false; // опускаем флаг того, что введено третье число
+        }
+        // пункт меню, в котором описано условие задания
+        private void заданиеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Даны три различных целых числа. Определить, какое из них " +
+                "(первое, второе или третье): а) самое большое; б) самое маленькое; в) является средним " +
+                "(средним назовем число, которое больше наименьшего из данных чисел, но меньше наибольшего).");
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // очищаем textBox после нажатия клавиши "Очистить"
+            txtFirstNumber.Clear();
+            txtSecondNumber.Clear();
+            txtThirdNumber.Clear();
+            txtFirstNumber.Focus(); // установка фокуса на TextBox первого числа
         }
         private void button1_Click(object sender, EventArgs e) // реакция на клик
         {
@@ -83,13 +93,6 @@ namespace Лабораторная_работа__2
                 a[0] = int.Parse(this.txtFirstNumber.Text); // первое число
                 a[1] = int.Parse(this.txtSecondNumber.Text); // второе число
                 a[2] = int.Parse(this.txtThirdNumber.Text); // третье число
-
-                // передаем введенные значения в параметры  
-                Properties.Settings.Default.a1 = a[0];
-                Properties.Settings.Default.a2 = a[1];
-                Properties.Settings.Default.a3 = a[2];
-                Properties.Settings.Default.Save(); // сохраняем переданные значения,
-                                                    // чтобы они восстановились при очередном запуске
 
                 MessageBox.Show(Logic.Compare(a)); // выводим ответ
             }

@@ -22,41 +22,5 @@ namespace Лабораторная_работа__2.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int a1 {
-            get {
-                return ((int)(this["a1"]));
-            }
-            set {
-                this["a1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int a2 {
-            get {
-                return ((int)(this["a2"]));
-            }
-            set {
-                this["a2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int a3 {
-            get {
-                return ((int)(this["a3"]));
-            }
-            set {
-                this["a3"] = value;
-            }
-        }
     }
 }
